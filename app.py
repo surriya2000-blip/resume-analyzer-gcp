@@ -6,7 +6,13 @@ import vertexai
 from vertexai.generative_models import GenerativeModel
 
 # Authentication
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "credentials.json"
+service_account_info = dict(st.secrets["gcp_service_account"])
+
+with tempfile.NamedTemporaryFile(mode="w", delete=False, suffix=".json") as f:
+    json.dump(service_account_info, f)
+    credentials_path = f.name
+
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = credentials_path
 
 # Initialize Vertex AI
 vertexai.init(
