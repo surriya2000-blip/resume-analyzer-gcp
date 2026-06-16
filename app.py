@@ -1,7 +1,8 @@
 import os
 import streamlit as st
 from PyPDF2 import PdfReader
-
+import json
+import tempfile
 import vertexai
 from vertexai.generative_models import GenerativeModel
 
